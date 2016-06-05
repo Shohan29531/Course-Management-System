@@ -203,10 +203,11 @@
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h4>Class Test Declarations</h4>
-                                    <h4 class="subheading">Our Humble Beginnings</h4>
+                                    <h4 class="subheading"></h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                    <p class="text-muted">Students can get notifications of their 
+                                        class tests faster and easier than ever</p>
                                 </div>
                             </div>
                         </li>
@@ -217,10 +218,10 @@
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h4>Assignment Notifications</h4>
-                                    <h4 class="subheading">An Agency is Born</h4>
+                                    <h4 class="subheading"></h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                    <p class="text-muted">Getting notifications is now a few clicks away!</p>
                                 </div>
                             </div>
                         </li>
@@ -231,10 +232,10 @@
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h4>Uploaded Course Files</h4>
-                                    <h4 class="subheading">Transition to Full Service</h4>
+                                    <h4 class="subheading"></h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                    <p class="text-muted">No more struggle over getting course materials.</p>
                                 </div>
                             </div>
                         </li>
@@ -245,10 +246,10 @@
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h4>Profiles Of All Teachers And Students</h4>
-                                    <h4 class="subheading">Phase Two Expansion</h4>
+                                    <h4 class="subheading"></h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                    <p class="text-muted">Seek anyone's contact and other information any time</p>
                                 </div>
                             </div>
                         </li>
