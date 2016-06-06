@@ -1,4 +1,4 @@
-
+<?php date_default_timezone_set('Africa/Lagos');?>
 <?php
 
  class Course_model extends CI_Model{
@@ -16,21 +16,22 @@
 		return $insert;
     }
     function assign_teacher_to_a_course(){
+
         $new_course_insert_data = array(
             'course_id' => $this->input->post('course_id'),
             'teacher_id' => $this->input->post('teacher_id')
             );
         $insert = $this->db->insert('teaches', $new_course_insert_data);
-        return $insert;       
+        return $insert; 
 
     }
 
-    function display_course_list_of_student(){
+    function display_course_list_of_student($username){
 
         //
 		$this->db->select('member_id');
 		$this->db->from('members');
-		$this->db->where('username',$this->session->userdata('username'));
+		$this->db->where('username',$username);
 		$where_clause = $this->db->get_compiled_select();
 
 		//
@@ -69,11 +70,11 @@
          return $data;
      }       
     }
-    function display_course_list_of_teacher(){
+    function display_course_list_of_teacher($username){
     	//
 		$this->db->select('member_id');
 		$this->db->from('members');
-		$this->db->where('username',$this->session->userdata('username'));
+		$this->db->where('username',$username);
 		$where_clause = $this->db->get_compiled_select();
 		//
 	    $this->db->select('course_id');
@@ -98,11 +99,11 @@
 
     }
   
-    function show_course_detail(){
+    function show_course_detail($course_id){
 
 		$this->db->select('*');
 		$this->db->from('courses');
-		$this->db->where('course_id',$this->uri->segment(3));
+		$this->db->where('course_id',$course_id);
 
 		$q = $this->db->get();
 		if($q->num_rows() > 0){
@@ -114,10 +115,10 @@
          return $data;
      }
  }
-     function show_course_teachers(){
+     function show_course_teachers($course_id){
      	$this->db->select('teacher_id');
 		$this->db->from('teaches');
-		$this->db->where('course_id',$this->uri->segment(3));
+		$this->db->where('course_id',$course_id);
 		$where_clause = $this->db->get_compiled_select();
 
 		$this->db->select('first_name,last_name,member_id');
@@ -151,10 +152,10 @@
      }        
      }
 
-     function show_course_registered_students(){
+     function show_course_registered_students($course_id){
         $this->db->select('level_and_term');
 		$this->db->from('courses');
-		$this->db->where('course_id',$this->uri->segment(3));
+		$this->db->where('course_id',$course_id);
 		$where_clause = $this->db->get_compiled_select();
 
 		$this->db->select('student_id');
@@ -177,10 +178,12 @@
      }	
      }
 
-     function show_course_forum_posts(){
+     function show_course_forum_posts($course_id){
+
         $this->db->select('*');
-		$this->db->from('course_forum');
-		$this->db->where('course_id',$this->uri->segment(3));
+        $this->db->from('course_forum');
+        $this->db->join('members', 'course_forum.teacher_id = members.member_id');
+		$this->db->where('course_id',$course_id);
 		$q = $this->db->get();
 		if($q->num_rows() > 0){
 
@@ -195,7 +198,12 @@
 
      }
 
-     function add_a_forum_post(){
+     function add_a_forum_post($course_id,$teacher_id,$forum_post){
+        $this->load->helper('date');
+        $format = 'DATE_RFC1036';
+        $time = time();
+
+        $datestring = standard_date($format, $time);
 
         $this->db->select_max('entry_no');
         $query = $this->db->get('course_forum');  
@@ -203,20 +211,20 @@
         $q = $q + 1;  
           $new_post_dec = array(
             'entry_no' =>  $q,
-            'course_id' => $this->uri->segment(3),
-            'forum_post' => $this->input->post('forum_post')
+            'course_id' => $course_id,
+            'forum_post' => $forum_post,
+            'teacher_id' => $teacher_id,
+            'addition_time' => $datestring
             );
         
-        if(!$this->input->post('forum_post'))
-        return FALSE;    
+        if(!$forum_post) return FALSE;    
           
-        $insert = $this->db->insert('course_forum', $new_post_dec);
-        return $insert;         
+        $insert = $this->db->insert('course_forum', $new_post_dec); return $insert;         
      }
 
-     function delete_a_forum_post(){
-        $e_no = intval($this->uri->segment(3));
-        $q = $this->db->delete('course_forum', array('entry_no' => $e_no,'course_id' => $this->uri->segment(4))); 
+     function delete_a_forum_post($entry_no,$course_id){
+        $e_no = intval($entry_no);
+        $q = $this->db->delete('course_forum', array('entry_no' => $e_no,'course_id' => $course_id)); 
         return $q;       
      }
 
@@ -235,10 +243,10 @@
 
     }
 
-    function show_uploaded_course_files(){
+    function show_uploaded_course_files($course_id){
         $this->db->select('*');
         $this->db->from('course_materials');
-        $this->db->where('course_id',$this->uri->segment(3));
+        $this->db->where('course_id',$course_id);
         $q = $this->db->get();
         if($q->num_rows() > 0){
 
